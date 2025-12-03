@@ -1,10 +1,21 @@
 import axios from "axios";
-import { PokemonImage, type PokemonList } from "../interfaces/Pokemon";
+import type { PokemonImage, Pokemon, PokemonList } from "../interfaces/Pokemon";
 
 export async function getAllPokemons() {
   const url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151";
   const response = await axios.get<PokemonList>(url);
-  return response.data;
+
+  const pokemons: Pokemon[] = [];
+
+  for (const pokemon of response.data.results) {
+    const pokemonImage = await getPokemonImage(pokemon.name);
+    pokemons.push({
+      name: pokemon.name,
+      image: pokemonImage.sprites.front_default,
+    });
+  }
+
+  return pokemons;
 }
 
 async function fetchPokemon<T>(pokemon: string) {
