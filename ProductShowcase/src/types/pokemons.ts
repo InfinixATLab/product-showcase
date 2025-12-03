@@ -12,6 +12,15 @@ export interface PokemonListResponse {
 
 export interface PokemonDetail {
   name: string;
+  height: number;
+  weight: number;
+  types: {
+    slot: number;
+    type: {
+      name: string;
+      url: string;
+    };
+  }[];
   sprites: {
     front_default: string | null;
     other?: {
@@ -20,4 +29,12 @@ export interface PokemonDetail {
       };
     };
   };
+  stats: {
+    base_stat: number;
+    effort: 0;
+    stat: {
+      name: string;
+      url: string;
+    };
+  }[];
 }
