@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center py-6">
-      <h1 className="text-black font-bold text-4xl mt-6">Pokemon Desk</h1>
+      <h1 className="text-black font-bold text-4xl mt-6">Pokemon Dex</h1>
 
       {loading && <p className="mt-12">Loading...</p>}
 
