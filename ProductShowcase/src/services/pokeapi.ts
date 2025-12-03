@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { PokemonImage, Pokemon, PokemonList } from "../interfaces/Pokemon";
+import type { PokemonList, Pokemon, PokemonImage } from "../interfaces/pokemon";
 
 export async function getAllPokemons() {
   const url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151";
