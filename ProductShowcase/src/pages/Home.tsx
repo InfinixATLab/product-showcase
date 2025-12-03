@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { PokemonCard } from '../components/PokemonCard';
 import { fetchPokemonList, fetchPokemonDetails } from '../api/pokemonService';
 import type { PokemonData, PokemonListItem } from '../types/pokemon';
@@ -7,6 +7,7 @@ import { Spinner } from '../components/Spinner';
 export const HomePage = () => {
   const [pokemons, setPokemons] = useState<PokemonData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const loadPokemons = async () => {
@@ -37,6 +38,13 @@ export const HomePage = () => {
     loadPokemons();
   }, []);
 
+  const filteredPokemons = useMemo(() => {
+        if (!searchTerm) return pokemons;
+        return pokemons.filter((pokemon) =>
+          pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }, [pokemons, searchTerm]);
+
   if (loading) {
     return (
       <div className="flex justify-center items-center py-20">
@@ -49,10 +57,19 @@ export const HomePage = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Lista de Pokémons (1ª Geração)</h2>
+
+      <input
+        type="text"
+        placeholder="Buscar Pokémon..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="border p-2 rounded mb-4 w-full max-w-sm"
+      />
+
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-        {pokemons.map((pokemon) => (
-          <PokemonCard key={pokemon.name} pokemon={pokemon} />
-        ))}
+        {filteredPokemons.map((pokemon) => (
+        <PokemonCard key={pokemon.name} pokemon={pokemon} />
+         ))}
       </div>
     </div>
   );
