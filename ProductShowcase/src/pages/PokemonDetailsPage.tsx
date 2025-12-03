@@ -8,14 +8,14 @@ const PokemonDetailPage = () => {
   const [pokemon, setPokemon] = useState<PokemonDetail | null>(null);
   const [image, setImage] = useState<string>("");
 
+  const baseURL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     if (!name) return;
 
     const fetchPokemon = async () => {
       try {
-        const res = await axios.get<PokemonDetail>(
-          `https://pokeapi.co/api/v2/pokemon/${name}/`
-        );
+        const res = await axios.get<PokemonDetail>(`${baseURL}/${name}/`);
         setPokemon(res.data);
         setImage(
           res.data.sprites.other?.["official-artwork"]?.front_default ||
@@ -28,7 +28,7 @@ const PokemonDetailPage = () => {
     };
 
     fetchPokemon();
-  }, [name]);
+  }, [baseURL, name]);
 
   if (!pokemon) return <p>Carregando...</p>;
 

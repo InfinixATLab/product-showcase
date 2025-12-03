@@ -3,9 +3,8 @@ import { useFetch } from "../hooks/useFetch";
 import type { PokemonListResponse } from "../types/pokemons";
 
 const Home = () => {
-  const { data, loading, error } = useFetch<PokemonListResponse>(
-    "https://pokeapi.co/api/v2/pokemon"
-  );
+  const baseURL = import.meta.env.VITE_API_URL;
+  const { data, loading, error } = useFetch<PokemonListResponse>(baseURL);
 
   if (error) {
     return (
