@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getPokemonList, getPokemonDetails } from "../api/api";
 import type { PokemonListItem, PokemonDetails } from "../api/api";
 import { PokemonCard } from "../components/cards/pokemoncard";
+import { usePokemonTeam } from "../context/pokemonteamcontext";
 
 interface PokemonCardData {
   name: string;
@@ -12,6 +13,9 @@ export function Home() {
   const [pokemons, setPokemons] = useState<PokemonCardData[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+
+    // contexto
+  const { team } = usePokemonTeam(); 
 
   useEffect(() => {
     async function fetchPokemons() {
@@ -46,6 +50,9 @@ export function Home() {
     p.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  // extrair somente os pokémons favoritos da lista completa
+  const favoritePokemons = pokemons.filter((p) => team.includes(p.name));
+
   return (
     <div className="pokedex-container">
 
@@ -53,6 +60,7 @@ export function Home() {
         <h1 className="pokedex-title">Pokédex</h1>
       </header>
 
+            {/* Barra de Busca */}
       <section className="search-bar">
         <input
           type="text"
@@ -63,6 +71,21 @@ export function Home() {
         />
       </section>
 
+      {/* favoritos */}
+      {team.length > 0 && (
+        <section className="team-section">
+          <h2 className="team-title">Pokémons Favoritos</h2>
+
+          <div className="pokemon-list">
+            {favoritePokemons.map((p) => (
+              <PokemonCard key={p.name} name={p.name} image={p.image} />
+            ))}
+          </div>
+        </section>
+      )}
+
+
+      {/* Lista completa */}
       <section>
         {loading ? (
           <p>Carregando...</p>

@@ -51,3 +51,23 @@
 .team-title {
   @apply text-2xl font-semibold mb-4 text-center;
 }
+
+/* Wrapper do card */
+.card-wrapper {
+  @apply relative;
+}
+
+/* Botão */
+.favorite-button {
+  @apply absolute top-2 right-2 z-10;
+}
+
+/* Ícone (PNG) */
+.heart-icon {
+  @apply w-7 h-7 object-contain transition;
+}
+
+/* Quando estiver favoritado */
+.heart-icon.filled {
+  @apply scale-110;
+}
