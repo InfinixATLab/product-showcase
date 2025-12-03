@@ -38,12 +38,12 @@ A maior dificuldade foi resolver o problema das imagens na lista inicial de Pok�
 3. Criada função auxiliar `getPokemonImageUrl(id)` no serviço da API
 
 ### O que não deu tempo de fazer
-- **Mais filtros:** Adicionaria filtros por tipo, geração e habilidades
+- **Deploy** Acredito que não tenha configurado corretamente as rotas, por ser uma aplicação web utilizando SPA
+o GitHub Pages não renderiza a navegação.
 
 ## 3. Link para Deploy
-[INSERIR LINK DO GITHUB PAGES AQUI]
+[\[Pokedex Tiago de Noronha Leopoldo\]](https://tiagoleopoldo.github.io/product-showcase/)
 
-## 4. Recomendações
 
 ### Para melhorar o desafio:
 1. Nenhuma sugestão.
