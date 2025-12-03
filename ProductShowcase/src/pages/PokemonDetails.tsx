@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { api } from "../services/api";
-import { PokemonDetails as PokemonDetailsType } from "../types/Pokemon";
+import {
+  PokemonDetails as PokemonDetailsType,
+  Ability,
+  Move,
+} from "../types/Pokemon";
 
 export default function PokemonDetails() {
   const { name } = useParams();
@@ -134,8 +138,11 @@ export default function PokemonDetails() {
             Habilidades
           </h2>
           <div className="flex gap-2 flex-wrap justify-center">
-            {pokemon.abilities.map((a) => (
-              <span className="px-2 py-1 bg-indigo-50 text-indigo-900 rounded-full text-sm shadow-sm capitalize">
+            {pokemon.abilities.map((a: Ability, index: number) => (
+              <span
+                key={index}
+                className="px-2 py-1 bg-indigo-50 text-indigo-900 rounded-full text-sm shadow-sm capitalize"
+              >
                 {a.ability.name}
               </span>
             ))}
@@ -148,8 +155,8 @@ export default function PokemonDetails() {
             Movimentos Principais
           </h2>
           <ul className="list-disc list-inside text-gray-900 space-y-0.5 max-h-32 overflow-y-auto text-sm">
-            {pokemon.moves.slice(0, 5).map((m) => (
-              <li key={m.move.name} className="capitalize">
+            {pokemon.moves.slice(0, 5).map((m: Move, index: number) => (
+              <li key={index} className="capitalize">
                 {m.move.name}
               </li>
             ))}
