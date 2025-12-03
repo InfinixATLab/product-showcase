@@ -18,7 +18,21 @@ npm run dev
 O projeto estará disponível em: `http://localhost:5173`
 
 ## 2. Decisões de design
+# Decisões de UI/UX
+Mobile-first: Todo o design foi pensado para dispositivos móveis primeiro
 
+TailwindCSS: Escolhido pela produtividade e design system consistente
+
+Cores temáticas: Paleta baseada nos jogos Pokémon (vermelho, azul, amarelo)
+
+Loading states: Spinner personalizado com Pokéball para imersão
+
+Feedback visual: Notificações para ações de favoritos
+
+Grid responsivo: Adapta de 1 coluna (mobile) a 6 colunas (desktop)
+
+
+Utiliza sprites oficiais de alta qualidade
 ### Estrutura de pastas
 Escolhi uma estrutura organizada por funcionalidade:
 - `src/components/`: Componentes reutilizáveis
