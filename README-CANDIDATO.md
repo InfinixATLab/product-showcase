@@ -177,8 +177,3 @@ npm run preview
 npm run lint
 ```
 
----
-
-**Desenvolvido com ❤️ em React + TypeScript**
-
-Data: Dezembro de 2024
