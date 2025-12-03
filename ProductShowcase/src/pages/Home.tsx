@@ -3,6 +3,7 @@ import { PokemonCard } from '../components/PokemonCard';
 import { fetchPokemonList, fetchPokemonDetails } from '../api/pokemonService';
 import type { PokemonData, PokemonListItem } from '../types/pokemon';
 import { Spinner } from '../components/Spinner';
+import { FavoriteTeam } from '../components/FavoriteTeam';
 
 export const HomePage = () => {
   const [pokemons, setPokemons] = useState<PokemonData[]>([]);
@@ -57,7 +58,7 @@ export const HomePage = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Lista de Pokémons (1ª Geração)</h2>
-
+      <FavoriteTeam />
       <input
         type="text"
         placeholder="Buscar Pokémon..."
