@@ -33,10 +33,3 @@ export interface Pokemon {
   height: number;
   weight: number;
 }
-
-export interface PokemonContextType {
-  favorites: string[];
-  addFavorite: (name: string) => void;
-  removeFavorite: (name: string) => void;
-  isFavorite: (name: string) => boolean;
-}

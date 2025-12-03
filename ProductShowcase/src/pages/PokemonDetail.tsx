@@ -3,12 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { pokemonApi } from '../services/pokemonApi';
 import type { Pokemon } from '../types/pokemon';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
+import { usePokemonContext } from '../contexts/PokemonContext';
 
 const PokemonDetail: React.FC = () => {
   const { name } = useParams<{ name: string }>();
   const navigate = useNavigate();
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [loading, setLoading] = useState(true);
+  const { isFavorite, addFavorite, removeFavorite } = usePokemonContext();
 
   useEffect(() => {
     if (name) {
@@ -22,9 +24,19 @@ const PokemonDetail: React.FC = () => {
       const data = await pokemonApi.getPokemonByName(pokemonName);
       setPokemon(data);
     } catch (error) {
-      console.error('Error fetching pokemon details:', error);
+      console.error('Erro ao encontrar detalhes do Pokémon:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleFavoriteToggle = () => {
+    if (!pokemon) return;
+    
+    if (isFavorite(pokemon.name)) {
+      removeFavorite(pokemon.name);
+    } else {
+      addFavorite(pokemon.name);
     }
   };
 
@@ -35,7 +47,7 @@ const PokemonDetail: React.FC = () => {
   if (!pokemon) {
     return (
       <div>
-        <p>Pokémon não encontrado</p>
+        <p>Pokémon não encontrado!</p>
         <button onClick={() => navigate('/')}>
           Voltar para Home Page
         </button>
@@ -47,6 +59,11 @@ const PokemonDetail: React.FC = () => {
     <div>
       <button onClick={() => navigate('/')}>
         Voltar para Home Page
+      </button>
+
+      {/* Favorite Button */}
+      <button onClick={handleFavoriteToggle}>
+        {isFavorite(pokemon.name) ? 'Remover do Time' : 'Adicionar ao Time'}
       </button>
 
       <div>
@@ -66,12 +83,12 @@ const PokemonDetail: React.FC = () => {
           </div>
           <div>
             <h3>Peso</h3>
-            <p>{(pokemon.weight / 10).toFixed(1)} kg</p>
+            <p>{(pokemon.weight / 10).toFixed(1)} Kg</p>
           </div>
         </div>
 
         <div>
-          <h3>Types</h3>
+          <h3>Tipo</h3>
           <div>
             {pokemon.types.map((typeInfo) => (
               <span key={typeInfo.slot}>
