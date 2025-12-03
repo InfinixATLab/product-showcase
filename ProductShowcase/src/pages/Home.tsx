@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { PokemonCard } from '../components/PokemonCard';
-import { fetchPokemonList, fetchPokemonDetails } from '../api/pokemonService';
+import { fetchPokemonList, fetchPokemonDetails, clearPokemonCache } from '../api/pokemonService';
 import type { PokemonData, PokemonListItem } from '../types/pokemon';
 import { Spinner } from '../components/Spinner';
 import { FavoriteTeam } from '../components/FavoriteTeam';
@@ -9,6 +9,11 @@ export const HomePage = () => {
   const [pokemons, setPokemons] = useState<PokemonData[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+
+  const handleClearCacheAndReload = () => {
+        clearPokemonCache();
+        window.location.reload(); 
+    };
 
   useEffect(() => {
     const loadPokemons = async () => {
@@ -55,9 +60,16 @@ export const HomePage = () => {
     );
   }
 
-  return (
+  return (  
     <div>
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Lista de Pokémons (1ª Geração)</h2>
+      <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-gray-800">Lista de Pokémons (1ª Geração)</h2>
+            <button
+              onClick={handleClearCacheAndReload}
+              className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition shadow-md text-sm whitespace-nowrap"
+            > Atualizar
+            </button>
+        </div>
       <FavoriteTeam />
       <input
         type="text"
