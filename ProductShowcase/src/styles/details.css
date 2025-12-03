@@ -1,0 +1,28 @@
+/* Container principal */
+.details-container {
+  @apply max-w-xl mx-auto p-6 flex flex-col gap-6 text-center bg-green-100 rounded-xl m-10 shadow-lg;
+}
+
+/* Botão de voltar */
+.details-back {
+  @apply text-green-700 hover:underline inline-block mb-2;
+}
+
+/* Título */
+.details-title {
+  @apply text-3xl font-bold capitalize text-center;
+}
+
+/* Imagem */
+.details-image {
+  @apply w-64 h-64 mx-auto;
+}
+
+/* Tipos */
+.details-types {
+  @apply flex gap-2 mt-4 flex-wrap justify-center;
+}
+
+.type-badge {
+  @apply bg-gray-700 text-white px-3 py-1 rounded-full text-sm capitalize shadow;
+}
