@@ -23,9 +23,9 @@ Mobile-first: Todo o design foi pensado para dispositivos móveis primeiro
 
 TailwindCSS: Escolhido pela produtividade e design system consistente
 
-Cores temáticas: Paleta baseada nos jogos Pokémon (vermelho, azul, amarelo)
+Cores temáticas: Paleta baseada nos jogos Pokémon
 
-Loading states: Spinner personalizado com Pokéball para imersão
+Loading states: Spinner personalizado
 
 Feedback visual: Notificações para ações de favoritos
 
