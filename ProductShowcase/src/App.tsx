@@ -1,35 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { AppRouter } from './routes/Router';
+import { FavoritesProvider } from './context/FavoritesContext';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <FavoritesProvider>
+      <div className="min-h-screen bg-gray-100">
+        <header className="bg-red-600 p-4 shadow-md">
+          <h1 className="text-white text-3xl font-bold text-center">Pokédex</h1>
+        </header>
+        <main className="container mx-auto p-4">
+          <AppRouter />
+        </main>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </FavoritesProvider>
+  );
 }
 
-export default App
+export default App;
