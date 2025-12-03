@@ -11,8 +11,15 @@ export const Home = () => {
     const fetchPokemons = async () => {
       try {
         setLoading(true);
-        const list = await getPokemonList();
-        setPokemons(list);
+
+        const cached = localStorage.getItem("pokemonList");
+        if (cached) {
+          setPokemons(JSON.parse(cached));
+        } else {
+          const list = await getPokemonList();
+          setPokemons(list);
+          localStorage.setItem("pokemonList", JSON.stringify(list));
+        }
       } catch (err) {
         console.log("Erro ao buscar Pokémon", err);
       } finally {
@@ -33,6 +40,16 @@ export const Home = () => {
     pokemon.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  //Função para atualizar a lista
+  const handleRefresh = async () => {
+    localStorage.removeItem("pokemonList");
+    setLoading(true);
+    const list = await getPokemonList();
+    setPokemons(list);
+    localStorage.setItem("pokemonList", JSON.stringify(list));
+    setLoading(false);
+  };
+
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4 text-center">Pokedéx</h1>
@@ -45,6 +62,15 @@ export const Home = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+      </div>
+
+      <div className="mb-4 text-center">
+        <button
+          onClick={handleRefresh}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Atualizar Lista
+        </button>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
