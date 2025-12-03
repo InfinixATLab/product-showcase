@@ -11,6 +11,7 @@ export interface PokemonListResponse {
 }
 
 export interface PokemonDetail {
+  name: string;
   sprites: {
     front_default: string | null;
     other?: {
