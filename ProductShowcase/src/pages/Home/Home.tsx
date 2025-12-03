@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { api } from '../../services/api/pokeApi';
 import { PokemonListResponse } from '../../interfaces/Pokemon';
+import { getPokemonList } from '../../services/api/pokemonService';
 
-export async function getPokemonList(limit = 151) {
-    const res = await api.get<PokemonListResponse>(`/pokemon?limit=${limit}`)
-    return res.data
+export function Home() {
+    const [data, setData] = useState<PokemonListResponse | null>(null)
+    const [loading, setLoading] = useState(true)
+    
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await getPokemonList()
+                setData(response)
+            }
+            catch (error) {
+                console.error("Erro ao carregar Pokemons:", error)
+            }
+            finally {
+                setLoading(false)
+            }
+        }
+    })
 }
-
-// const Home: React.FC = () => {
-//     return (
-//         <div>
-//             <h1>Bem-vindo ao Pokédex!</h1>
-//             <p>Aqui você pode encontrar informações sobre seus Pokémon favoritos.</p>
-//             {/* Aqui você pode adicionar a lógica para renderizar a lista de Pokémon */}
-//         </div>
-//     );
-// };
-
-// export default Home;
