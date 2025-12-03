@@ -19,7 +19,7 @@ export default function App() {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
       <Header />
-      <div className="grow w-full grid grid-cols-2 md:grid-cols-3 place-items-center gap-6 py-8 px-8">
+      <div className="grow w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 place-items-center gap-6 py-8 px-8">
         {pokemons?.map((pokemon, index) => {
           const isLast = index === pokemons.length - 1;
           return (
