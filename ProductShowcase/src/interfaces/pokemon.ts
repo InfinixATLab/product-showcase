@@ -4,3 +4,9 @@ export interface PokemonList {
     url: string;
   }[];
 }
+
+export interface PokemonImage {
+  sprites: {
+    front_default: string;
+  };
+}
