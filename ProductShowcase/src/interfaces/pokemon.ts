@@ -10,3 +10,8 @@ export interface PokemonImage {
     front_default: string;
   };
 }
+
+export interface Pokemon {
+  name: string;
+  image: string;
+}
