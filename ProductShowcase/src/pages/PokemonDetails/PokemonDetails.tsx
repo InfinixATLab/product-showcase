@@ -13,9 +13,12 @@ export default function PokemonDetails() {
     async function fetchPokemon() {
       try {
         if (!name) {
-          const data = await getPokemonDetails(name)
-          setPokemon(data)
+          return
         }
+
+        const data = await getPokemonDetails(name)
+        setPokemon(data)
+
       } catch (error) {
         console.error("Erro ao carregar detalhes:", error)
       } finally {
@@ -41,7 +44,7 @@ export default function PokemonDetails() {
   const image = pokemon.sprites.other['official-artwork'].front_default
   
   return (
-    <div className="p-5 max-w-xl mx-auto">
+    <div className="p-5 max-w-xl mx-auto text-gray-900">
       <Link to="/" className="text-blue-600 underline mb-4 inline-block">
         ← Voltar
       </Link>
