@@ -23,5 +23,27 @@ export function PokemonTeamProvider({ children }: { children: React.ReactNode })
   //salva alteração de estado
   useEffect(() => {
     localStorage.setItem('pokemon_team',JSON.stringify(team))
-  },[team])
+  }, [team])
+  
+  function addToTeam(name: string) {
+    //evita duplicados
+    if (team.includes(name)) return
+    
+    //limita a 6 pokemons
+    if (team.length >= 6) {
+      alert('Seu time ja contém 6 Pokemons!')
+      return
+    }
+
+    setTeam([...team,name])
+  }
+
+
+
+
+   return (
+    <PokemonTeamContext.Provider value={{ team, addToTeam }}>
+      {children}
+    </PokemonTeamContext.Provider>
+  );
 }
