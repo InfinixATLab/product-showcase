@@ -74,7 +74,7 @@ Devido à limitação do tempo, as seguintes funcionalidades não foram implemen
 
 O projeto está hospedado e acessível no Vercel:
 
-🔗 **[Link para o Deploy no Vercel]** (`https://product-showcase-henna.vercel.app/`)
+🔗 **[Link para o Deploy no Vercel]** (https://product-showcase-henna.vercel.app/)
 
 ---
 
