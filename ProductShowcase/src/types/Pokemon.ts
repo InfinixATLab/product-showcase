@@ -1,3 +1,8 @@
+export interface PokemonListItem {
+  name: string;
+  url: string;
+}
+
 export interface Ability {
   ability: {
     name: string;
@@ -34,9 +39,9 @@ export interface PokemonDetails {
   id: number;
   height: number;
   weight: number;
-  base_experience: number; // 🔹 adicionado
-  abilities: Ability[]; // 🔹 adicionado
-  moves: Move[]; // 🔹 adicionado
+  base_experience: number;
+  abilities: Ability[];
+  moves: Move[];
   types: TypeSlot[];
   sprites: Sprites;
 }
