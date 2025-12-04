@@ -8,7 +8,7 @@ export function Home() {
     const [data, setData] = useState<PokemonListResponse | null>(null)
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
-    const { team } = usePokemonTeam();
+    const { team,clearTeam } = usePokemonTeam();
 
     useEffect(() => {
         async function fetchData() {
@@ -58,6 +58,13 @@ export function Home() {
   className="mb-4 px-4 py-2 bg-blue-600 text-white rounded"
 >
   Atualizar lista
+</button>
+
+            <button
+  onClick={clearTeam}
+  className="mt-2 px-3 py-1 bg-red-500 text-white rounded"
+>
+  Limpar time
 </button>
 
 

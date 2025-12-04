@@ -1,59 +1,62 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-interface PokemonTeamContextType{
+interface PokemonTeamContextType {
   team: string[];
   addToTeam: (name: string) => void;
-  removeFromTeam:(name:string)=>void
+  removeFromTeam: (name: string) => void;
+  clearTeam: () => void;
 }
 
-const PokemonTeamContext = createContext<PokemonTeamContextType | null>(null)
+const PokemonTeamContext = createContext<PokemonTeamContextType | null>(null);
 
 export function PokemonTeamProvider({ children }: { children: React.ReactNode }) {
-  const [team, setTeam] = useState<string[]>([])
-  
-  //carrega time do localstorage
+  const [team, setTeam] = useState<string[]>([]);
+
+  // Carrega time do localStorage
   useEffect(() => {
-    const stored=localStorage.getItem('pokemon_team')
-    
+    const stored = localStorage.getItem('pokemon_team');
     if (stored) {
-      setTeam(JSON.parse(stored))
+      setTeam(JSON.parse(stored));
     }
-  }, [])
-  
-  //salva alteração de estado
+  }, []);
+
+  // Salva sempre que o time mudar
   useEffect(() => {
-    localStorage.setItem('pokemon_team',JSON.stringify(team))
-  }, [team])
-  
+    localStorage.setItem('pokemon_team', JSON.stringify(team));
+  }, [team]);
+
   function addToTeam(name: string) {
-    //evita duplicados
-    if (team.includes(name)) return
-    
-    //limita a 6 pokemons
+    if (team.includes(name)) return;
+
     if (team.length >= 6) {
-      alert('Seu time ja contém 6 Pokemons!')
-      return
+      alert('Seu time já contém 6 Pokémons!');
+      return;
     }
 
-    setTeam([...team,name])
+    setTeam([...team, name]);
   }
 
   function removeFromTeam(name: string) {
-    setTeam(team.filter((p)=>p!==name))
+    setTeam(team.filter((p) => p !== name));
   }
 
+  function clearTeam() {
+    setTeam([]);
+  }
 
-   return (
-    <PokemonTeamContext.Provider value={{ team, addToTeam,removeFromTeam }}>
+  return (
+    <PokemonTeamContext.Provider
+      value={{ team, addToTeam, removeFromTeam, clearTeam }}
+    >
       {children}
     </PokemonTeamContext.Provider>
   );
 }
 
 export function usePokemonTeam() {
-  const ctx = useContext(PokemonTeamContext)
+  const ctx = useContext(PokemonTeamContext);
   if (!ctx) {
-    throw new Error('usePokemonTeam deve ser usado dentro de PokemonTeamProvider')
+    throw new Error('usePokemonTeam deve ser usado dentro de PokemonTeamProvider');
   }
-  return ctx
+  return ctx;
 }
