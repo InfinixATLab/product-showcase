@@ -38,11 +38,13 @@ export function PokemonTeamProvider({ children }: { children: React.ReactNode })
     setTeam([...team,name])
   }
 
-
+  function removeFromTeam(name: string) {
+    setTeam(team.filter((p)=>p!==name))
+  }
 
 
    return (
-    <PokemonTeamContext.Provider value={{ team, addToTeam }}>
+    <PokemonTeamContext.Provider value={{ team, addToTeam,removeFromTeam }}>
       {children}
     </PokemonTeamContext.Provider>
   );
