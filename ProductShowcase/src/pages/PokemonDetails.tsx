@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { api } from "../services/api";
 import type { PokemonDetails as PokemonDetailsType } from "../types/pokemon";
 
@@ -20,28 +20,42 @@ export function PokemonDetails() {
   }
 
   return (
-    <div className="p-6 max-w-md mx-auto text-center">
-      <img
-        src={pokemon.sprites.other["official-artwork"].front_default}
-        alt={pokemon.name}
-        className="mx-auto h-40"
-      />
-
-      <h1 className="text-2xl font-bold capitalize mt-4">{pokemon.name}</h1>
-
-      <div className="flex justify-center gap-2 mt-2">
-        {pokemon.types.map((type) => (
-          <span
-            key={type.type.name}
-            className="px-3 py-1 bg-gray-200 rounded-full text-sm"
+    <div>
+      <section>
+        <nav className="px-6 py-4">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 bg-white/90 backdrop-blur text-cyan-600 font-medium shadow-sm transition-all duration-200 hover:bg-white hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2"
           >
-            {type.type.name}
-          </span>
-        ))}
-      </div>
+            ← Voltar
+          </Link>
+        </nav>
+      </section>
+      <section>
+        <div className="p-6 max-w-md mx-auto text-center">
+          <img
+            src={pokemon.sprites.other["official-artwork"].front_default}
+            alt={pokemon.name}
+            className="mx-auto h-40"
+          />
 
-      <p className="mt-4">Altura: {pokemon.height}</p>
-      <p>Peso: {pokemon.weight}</p>
+          <h1 className="text-2xl font-bold capitalize mt-4">{pokemon.name}</h1>
+
+          <div className="flex justify-center gap-2 mt-2">
+            {pokemon.types.map((type) => (
+              <span
+                key={type.type.name}
+                className="px-3 py-1 bg-gray-200 rounded-full text-sm"
+              >
+                {type.type.name}
+              </span>
+            ))}
+          </div>
+
+          <p className="mt-4">Altura: {pokemon.height}</p>
+          <p>Peso: {pokemon.weight}</p>
+        </div>
+      </section>
     </div>
   );
 }
