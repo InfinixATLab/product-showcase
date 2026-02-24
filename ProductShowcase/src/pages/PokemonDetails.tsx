@@ -7,6 +7,8 @@ export function PokemonDetails() {
   const { name } = useParams();
   const [pokemon, setPokemon] = useState<PokemonDetailsType | null>(null);
 
+  //esse useeffect serve para verificar se houve uma troca de nomes de pokemons na URL
+  //ex: de pikachu foi pra charmander, o useeffect dispara essa diferença com a ajuda do PokemonDetailsType
   useEffect(() => {
     api.get<PokemonDetailsType>(`/pokemon/${name}`).then((response) => {
       setPokemon(response.data);
@@ -25,9 +27,7 @@ export function PokemonDetails() {
         className="mx-auto h-40"
       />
 
-      <h1 className="text-2xl font-bold capitalize mt-4">
-        {pokemon.name}
-      </h1>
+      <h1 className="text-2xl font-bold capitalize mt-4">{pokemon.name}</h1>
 
       <div className="flex justify-center gap-2 mt-2">
         {pokemon.types.map((type) => (
