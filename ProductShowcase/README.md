@@ -32,3 +32,8 @@ POR QUE DESTA ORGANIZAÇÃO DE PASTA?
 → Código mais limpo e consistente;
 → Hierarquia clara e intuitiva;
 → Separação de responsabilidades, facilitando manutenção e evolução do projeto;
+
+
+POR QUE TÃO BÁSICO?
+
+- Acredito que projeto um básico bem estruturado é mais confiável, fácil de manter e de evoluir. Evitar complexidade desnecessária garante melhor legibilidade, menos pontos de falha e uma base sólida para futuras melhorias.
