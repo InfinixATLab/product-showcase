@@ -1,73 +1,39 @@
-# React + TypeScript + Vite
+-1 DEFINIÇÃO DE PASTAS:
+  - src/components → componentes visuais
+  - src/pages → telas da aplicação
+  - src/services → funções para chamar a API
+  - src/types → tipagens do TypeScript
+  - src/routes 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+FUNCIONALIDADE:
+SERVICES → responsabilidade única → comunicação com API
+TYPES → centraliza tipagens do TypeScript
+PAGES → telas completas (Home / Detalhes)
+COMPONENTS → componentes reutilizáveis
+ROUTES → separa lógica de rotas do resto do app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+RESUMO RAPIDO DO QUE FOI FEITO:
+- Consumo de API com Axios
+- Tipagem completa com TypeScript
+- Listagem inicial com 151 Pokémon
+- Busca por nome usando query params na URL
+- Navegação com React Router e rotas dinâmicas
+- Layout responsivo e estilização com TailwindCSS
+- Feedback de carregamento e estados de UI
+- Estrutura de pastas organizada e consistente
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+POR QUE DESTA ORGANIZAÇÃO DE PASTA?
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- A estrutura foi pensada para manter o projeto organizado, escalável e fácil de entender, mesmo para quem não participou do desenvolvimento.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+→ Código mais limpo e consistente;
+→ Hierarquia clara e intuitiva;
+→ Separação de responsabilidades, facilitando manutenção e evolução do projeto;
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+POR QUE TÃO BÁSICO?
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Acredito que projeto um básico bem estruturado é mais confiável, fácil de manter e de evoluir. Evitar complexidade desnecessária garante melhor legibilidade, menos pontos de falha e uma base sólida para futuras melhorias.
