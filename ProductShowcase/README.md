@@ -71,3 +71,21 @@ export default defineConfig([
   },
 ])
 ```
+
+
+-1 DEFINIÇÃO DE PASTAS:
+
+  - src/components → componentes visuais
+
+  - src/pages → telas da aplicação
+
+  - src/services → funções para chamar a API
+
+  - src/types → tipagens do TypeScript
+
+FUNCIONALIDADE:S
+services: responsabilidade única → comunicação com API
+types: centraliza tipagens do TypeScript
+pages: telas completas (Home / Detalhes)
+components: componentes reutilizáveis
+routes: separa lógica de rotas do resto do app
