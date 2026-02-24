@@ -16,7 +16,11 @@ export function PokemonDetails() {
   }, [name]);
 
   if (!pokemon) {
-    return <p className="text-center mt-10">Carregando...</p>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-300 border-t-black"></div>
+      </div>
+    );
   }
 
   return (
@@ -39,13 +43,15 @@ export function PokemonDetails() {
             className="mx-auto h-40 transition-all duration-300 ease-in-out group-hover:scale-105"
           />
 
-          <h1 className="transition-all duration-300 ease-in-out group-hover:scale-105 text-2xl font-bold capitalize mt-4" >{pokemon.name}</h1>
+          <h1 className="transition-all duration-300 ease-in-out group-hover:scale-105 text-2xl font-bold capitalize mt-4">
+            {pokemon.name}
+          </h1>
 
           <div className="flex justify-center gap-2 mt-2 transition-all duration-300 ease-in-out group-hover:scale-105 ">
             {pokemon.types.map((type) => (
               <span
                 key={type.type.name}
-                className= " px-3 py-1 bg-gray-200 rounded-full text-sm text-cyan-600 capitalize font-bold "
+                className=" px-3 py-1 bg-gray-200 rounded-full text-sm text-cyan-600 capitalize font-bold "
               >
                 {type.type.name}
               </span>
