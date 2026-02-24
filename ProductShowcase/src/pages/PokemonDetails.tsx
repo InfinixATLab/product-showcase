@@ -32,28 +32,30 @@ export function PokemonDetails() {
         </nav>
       </section>
       <section>
-        <div className="p-6 max-w-md mx-auto text-center">
+        <div className="p-6 max-w-md mx-auto text-center group">
           <img
             src={pokemon.sprites.other["official-artwork"].front_default}
             alt={pokemon.name}
-            className="mx-auto h-40"
+            className="mx-auto h-40 transition-all duration-300 ease-in-out group-hover:scale-105"
           />
 
-          <h1 className="text-2xl font-bold capitalize mt-4">{pokemon.name}</h1>
+          <h1 className="transition-all duration-300 ease-in-out group-hover:scale-105 text-2xl font-bold capitalize mt-4" >{pokemon.name}</h1>
 
-          <div className="flex justify-center gap-2 mt-2">
+          <div className="flex justify-center gap-2 mt-2 transition-all duration-300 ease-in-out group-hover:scale-105 ">
             {pokemon.types.map((type) => (
               <span
                 key={type.type.name}
-                className="px-3 py-1 bg-gray-200 rounded-full text-sm"
+                className= " px-3 py-1 bg-gray-200 rounded-full text-sm text-cyan-600 capitalize font-bold "
               >
                 {type.type.name}
               </span>
             ))}
           </div>
 
-          <p className="mt-4">Altura: {pokemon.height}</p>
-          <p>Peso: {pokemon.weight}</p>
+          <div className="transition-all duration-300 ease-in-outs group-hover:scale-105 font-semibold ">
+            <p className="mt-4">Altura: {pokemon.height}</p>
+            <p>Peso: {pokemon.weight}</p>
+          </div>
         </div>
       </section>
     </div>
