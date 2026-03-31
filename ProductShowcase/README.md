@@ -1,73 +1,55 @@
-# React + TypeScript + Vite
+# ProductShowcase - Luiz Antonio Haenisch
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Descrição curta: aplicação para exibir produtos (SPA). README com instruções, decisões de design, link de deploy e recomendações.
 
-Currently, two official plugins are available:
+## Seção 1: Instruções para rodar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Requisitos
+- Node.js >= 19
+- npm ou yarn
+- Git
 
-## React Compiler
+Instalação
+1. Clonar o repositório:
+  - git clone <repo-url>
+  - cd ProductShowcase
+2. Instalar dependências:
+  - npm install
+  - ou yarn
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Rodando localmente
+- Desenvolvimento:
+  - npm run dev
+  - ou npm start
 
-## Expanding the ESLint configuration
+## Seção 2: Decisões de design
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Estrutura de pastas atual (conforme este repositório)
+- `src/`
+  - `pages/`       — telas/rotas principais (ex.: `Home.tsx`, `PokemonDetail.tsx`, `PokemonContext.tsx`)
+  - `services/`    — integração com a API e tipos relacionados (`pokemonService.ts`)
+  - `main.tsx` e `App.tsx` — entrada da aplicação e configuração de rotas
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Motivação e justificativa das escolhas
+- Separação por responsabilidade: a lógica de chamadas à API fica em `services/`, as rotas e a UI ficam em `pages/` e o estado compartilhado (favoritos) está encapsulado em um `PokemonContext` — isso facilita entendimento e manutenção por um desenvolvedor júnior.
+- Simplicidade e clareza para um projeto de estágio: a estrutura evita over‑engineering. Em vez de muitos níveis de abstração, decidi manter o código direto e fácil de seguir (útil em entrevistas e revisões técnicas).
+- Persistência simples: o cache em `localStorage` (implementado no `Home` e sincronizado pelo `PokemonContext`) melhora UX sem introduzir infra complexa. Para um protótipo/portfólio isso demonstra preocupação com performance/estado sem adicionar backend.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Maior dificuldade e solução
+- Dificuldade principal: Tive dificuldades com a implementação da lista de favoritos durante o desenvolvimento e com a tipagem da API no início do projeto.
+- Como foi superado:
+  - Favoritos: a funcionalidade de favoritos foi implementada de forma simples (lista local com limite de 6 itens) por limitação de tempo. Durante o desenvolvimento havia um bug onde, ao atualizar a lista de Pokémon, os favoritos ficavam inconsistentes (alguns favoritos “órfãos” permaneciam no cache). Para resolver isso eu adotei uma reconciliação direta contra o `localStorage` no refresh e atualizei o contexto de favoritos com apenas os itens válidos — isso evita condições de corrida entre o carregamento do provider e o efeito de fetch na página.
+  - API / Tipagem: inicialmente eu estava usando uma tipagem incorreta ao consumir a API (o tipo esperado pelo componente não batia com o formato retornado). Consertei centralizando as interfaces em `src/services/pokemonService.ts` e importando os tipos corretos nos componentes; também corrigi pequenos erros de sintaxe no `PokemonDetail` (bloco try/catch mal fechado) e usei um alias (`PokemonDetailType`) para evitar colisão de nomes entre tipo e componente.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+O que ficou de fora (timebox) e plano se tivesse mais tempo
+- Deploy: não tive tempo de configurar e publicar o deploy (era um dos itens bônus). Planejo usar Vercel/Netlify para deploy contínuo a partir da branch `main` com CI que rode lint/build/test.
+- Pokemons Favoritos: apagar os pokemons favoritos quando utilizado o botão Atualizar Lista
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Seção 3: Link para Deploy (Bônus)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Deploy
+- Não tive tempo
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Seção final: Recomendações
+
+- Melhorar a explicação de como deve ser enviado o projeto.
